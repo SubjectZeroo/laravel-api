@@ -19,12 +19,19 @@ use Illuminate\Support\Facades\Route;
 //     return $request->user();
 // });
 
+Route::post('register', [App\Http\Controllers\UserController::class, 'register']);
+Route::post('login', [App\Http\Controllers\UserController::class, 'authenticate']);
 Route::get('articles', [App\Http\Controllers\ArticleController::class, 'index']);
 
-Route::get('articles/{article}', [App\Http\Controllers\ArticleController::class, 'show']);
 
-Route::post('articles', [App\Http\Controllers\ArticleController::class, 'store']);
+Route::group(['middleware' => ['jwt.verify']], function() {
+    Route::get('user', [App\Http\Controllers\UserController::class, 'getAuthenticatedUser']);
 
-Route::put('articles/{article}', [App\Http\Controllers\ArticleController::class, 'update']);
+    Route::get('articles/{article}', [App\Http\Controllers\ArticleController::class, 'show']);
 
-Route::delete('articles/{article}', [App\Http\Controllers\ArticleController::class, 'delete']);
+    Route::post('articles', [App\Http\Controllers\ArticleController::class, 'store']);
+
+    Route::put('articles/{article}', [App\Http\Controllers\ArticleController::class, 'update']);
+
+    Route::delete('articles/{article}', [App\Http\Controllers\ArticleController::class, 'delete']);
+});
