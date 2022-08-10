@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Article;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ArticleController extends Controller
 {
@@ -23,7 +24,7 @@ class ArticleController extends Controller
 
     public function store(Request $request)
     {
-        $article = Article::create($request->all());
+        $article = Article::create(['user_id' => Auth::user()->id, $request->all() ]);
         return response()->json($article, 201);
     }
 
