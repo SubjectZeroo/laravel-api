@@ -2,14 +2,14 @@
 
 namespace Database\Factories;
 
-use App\Models\Category;
+use App\Models\Article;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Article>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Comment>
  */
-class ArticleFactory extends Factory
+class CommentFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -20,9 +20,8 @@ class ArticleFactory extends Factory
     {
         return [
             'user_id' => User::count() ? User::pluck('id')->random() : User::factory(),
-            'category_id' => Category::count() ? Category::pluck('id')->random() : Category::factory(),
-            'title' => $this->faker->sentence(),
-            'body' =>$this->faker->paragraph()
+            'article_id' => Article::count() ? Article::pluck('id')->random() : Article::factory(),
+            'text' => $this->faker->paragraph()
         ];
     }
 }
