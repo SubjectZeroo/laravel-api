@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\Article as ResourcesArticle;
+use App\Http\Resources\ArticleCollection;
 use App\Models\Article;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -10,12 +12,15 @@ class ArticleController extends Controller
 {
     public function index()
     {
-        return Article::all();
+        // return Article::all();
+
+        return new ArticleCollection(Article::paginate());
+
     }
 
     public function show(Article $article)
     {
-        return $article;
+        return new ResourcesArticle($article);
     }
 
     public function create()
