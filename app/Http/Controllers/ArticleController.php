@@ -23,9 +23,6 @@ class ArticleController extends Controller
         return new ResourcesArticle($article);
     }
 
-    public function create()
-    {
-    }
 
     public function store(Request $request)
     {
@@ -33,9 +30,6 @@ class ArticleController extends Controller
         return response()->json($article, 201);
     }
 
-    public function edit()
-    {
-    }
 
     public function update(Request $request, Article $article)
     {
