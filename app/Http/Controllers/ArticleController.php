@@ -21,12 +21,14 @@ class ArticleController extends Controller
 
     public function show(Article $article)
     {
+        $this->authorize('view', $article);
         return new ResourcesArticle($article);
     }
 
 
-    public function store(Request $request)
+   public function store(Request $request)
     {
+        $this->authorize('create', Article::class);
         $validateData = $request->validate([]);
 
         $path = $request->image->store('public/articles');
@@ -46,6 +48,7 @@ class ArticleController extends Controller
 
     public function update(Request $request, Article $article)
     {
+        $this->authorize('update',$article);
         $article->update($request->all());
         return response()->json($article, 200);
     }
