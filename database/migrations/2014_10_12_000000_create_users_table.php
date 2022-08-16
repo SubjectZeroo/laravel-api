@@ -21,6 +21,8 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->string('role')->default(User::ROLE_USER);
+            $table->integer('userable_id');
+            $table->string('userable_type');
             $table->rememberToken();
             $table->timestamps();
         });
