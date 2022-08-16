@@ -92,4 +92,9 @@ class User extends Authenticatable implements JWTSubject
     {
         return $role === $this->roles || in_array($role, self::ROLES_HIERARCHY[$this->role]);
     }
+
+    public function userable()
+    {
+        return $this->morphTo();
+    }
 }
